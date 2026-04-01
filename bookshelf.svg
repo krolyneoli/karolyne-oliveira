@@ -1,0 +1,285 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" width="900" height="240">
+  <defs>
+    <style>
+      /* ── Float animations ── */
+      .b1{animation:f1 4.4s ease-in-out infinite 0.0s}
+      .b2{animation:f1 4.1s ease-in-out infinite 0.4s}
+      .b3{animation:f1 4.6s ease-in-out infinite 0.8s}
+      .b4{animation:f1 4.0s ease-in-out infinite 0.2s}
+      .b5{animation:f1 4.3s ease-in-out infinite 1.0s}
+      .b6{animation:f1 4.2s ease-in-out infinite 0.6s}
+      .b7{animation:f1 4.5s ease-in-out infinite 0.3s}
+      .b8{animation:f1 4.1s ease-in-out infinite 0.7s}
+      @keyframes f1{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+      /* ── Dashed path draw animation ── */
+      .path-draw{
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: draw 3s ease forwards;
+      }
+      @keyframes draw{to{stroke-dashoffset:0}}
+
+      /* ── Orbit dot ── */
+      .dot-orbit{animation: orbit 6s linear infinite}
+      @keyframes orbit{from{transform:rotate(0deg) translateX(28px) rotate(0deg)}to{transform:rotate(360deg) translateX(28px) rotate(-360deg)}}
+
+      /* ── Fade in wrapper ── */
+      .wrap{animation:fi 0.9s ease both}
+      @keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+      /* ── Shimmer on shelf line ── */
+      .shelf-line{animation:shimmer 3s ease-in-out infinite}
+      @keyframes shimmer{0%,100%{opacity:0.4}50%{opacity:0.9}}
+
+      /* ── Typography ── */
+      .lbl{font-family:'Courier New',monospace;font-size:8.5px;letter-spacing:0.8px;font-weight:700}
+      .sub{font-family:'Courier New',monospace;font-size:6.5px;letter-spacing:0.4px}
+      .sym{font-family:'Courier New',monospace;font-weight:700}
+
+      /* ── Pulse on symbols ── */
+      .pulse{animation:pulse 2.5s ease-in-out infinite}
+      @keyframes pulse{0%,100%{opacity:0.25}50%{opacity:0.55}}
+    </style>
+
+    <!-- Shelf gradient -->
+    <linearGradient id="sh" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(120,160,130,0)"/>
+      <stop offset="20%" stop-color="rgba(74,124,89,0.6)"/>
+      <stop offset="80%" stop-color="rgba(74,124,89,0.6)"/>
+      <stop offset="100%" stop-color="rgba(120,160,130,0)"/>
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Soft shadow -->
+    <filter id="ds">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="rgba(45,90,61,0.18)"/>
+    </filter>
+
+    <!-- Book colors (stroke only, transparent fill) -->
+    <!-- Each book: outline rectangle + inner deco lines + symbol + text -->
+  </defs>
+
+  <g class="wrap">
+
+  <!-- ═══════════════════════════════════════════════
+       DECORATIVE BACKGROUND ELEMENTS — circuit traces
+       ═══════════════════════════════════════════════ -->
+
+  <!-- faint grid lines -->
+  <line x1="0" y1="60"  x2="900" y2="60"  stroke="rgba(74,124,89,0.06)" stroke-width="1"/>
+  <line x1="0" y1="120" x2="900" y2="120" stroke="rgba(74,124,89,0.06)" stroke-width="1"/>
+  <line x1="0" y1="180" x2="900" y2="180" stroke="rgba(74,124,89,0.06)" stroke-width="1"/>
+
+  <!-- animated dashed path crossing behind books -->
+  <path d="M 20 140 Q 200 40 450 100 Q 650 160 880 80"
+        fill="none" stroke="rgba(74,124,89,0.18)" stroke-width="1.2"
+        stroke-dasharray="6 5" class="path-draw"/>
+
+  <!-- floating geometric accents -->
+  <circle cx="820" cy="50"  r="18" fill="none" stroke="rgba(74,124,89,0.14)" stroke-width="1.2"/>
+  <circle cx="820" cy="50"  r="10" fill="none" stroke="rgba(74,124,89,0.1)"  stroke-width="0.8"/>
+  <circle cx="820" cy="50"  r="3"  fill="rgba(74,124,89,0.3)"/>
+
+  <rect x="800" y="130" width="20" height="20" rx="2"
+        fill="none" stroke="rgba(74,124,89,0.12)" stroke-width="1"
+        transform="rotate(20 810 140)"/>
+
+  <line x1="840" y1="100" x2="870" y2="120" stroke="rgba(74,124,89,0.15)" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="855" y1="95"  x2="885" y2="115" stroke="rgba(74,124,89,0.1)"  stroke-width="0.8" stroke-dasharray="3 3"/>
+
+  <!-- small cross marks -->
+  <g stroke="rgba(74,124,89,0.2)" stroke-width="1.2">
+    <line x1="16"  y1="28"  x2="22"  y2="34"/>
+    <line x1="22"  y1="28"  x2="16"  y2="34"/>
+    <line x1="868" y1="148" x2="874" y2="154"/>
+    <line x1="874" y1="148" x2="868" y2="154"/>
+    <line x1="730" y1="22"  x2="736" y2="28"/>
+    <line x1="736" y1="22"  x2="730" y2="28"/>
+  </g>
+
+  <!-- ═══════════════════════
+       BOOKS — stroke/outline style
+       ═══════════════════════ -->
+
+  <!-- BOOK 1 · Lógica de Programação · #5b3fcf purple -->
+  <g class="b1" filter="url(#ds)">
+    <!-- spine body -->
+    <rect x="30" y="22" width="74" height="158" rx="3"
+          fill="rgba(91,63,207,0.06)" stroke="#5b3fcf" stroke-width="1.8"/>
+    <!-- inner frame -->
+    <rect x="37" y="30" width="60" height="142" rx="1"
+          fill="none" stroke="#5b3fcf" stroke-width="0.7" opacity="0.4"/>
+    <!-- top cap accent -->
+    <rect x="30" y="22" width="74" height="5" rx="2" fill="#5b3fcf" opacity="0.25"/>
+    <!-- page edge -->
+    <rect x="102" y="25" width="5" height="152" rx="1"
+          fill="none" stroke="#5b3fcf" stroke-width="0.8" opacity="0.3"/>
+    <!-- symbol -->
+    <text x="67" y="95" text-anchor="middle" font-size="17" class="sym pulse" fill="#5b3fcf">⟨/⟩</text>
+    <!-- deco dash lines -->
+    <line x1="42" y1="115" x2="90" y2="115" stroke="#5b3fcf" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="42" y1="120" x2="90" y2="120" stroke="#5b3fcf" stroke-width="0.4" stroke-dasharray="3 3" opacity="0.3"/>
+    <!-- title -->
+    <text transform="translate(69,162) rotate(-90)" class="lbl" fill="#5b3fcf">LÓGICA DE PROG.</text>
+    <text transform="translate(69,50)  rotate(-90)" class="sub" fill="#5b3fcf" opacity="0.6">fundamentos</text>
+  </g>
+
+  <!-- BOOK 2 · Python · #1e6faa blue · taller -->
+  <g class="b2" filter="url(#ds)">
+    <rect x="114" y="14" width="62" height="166" rx="3"
+          fill="rgba(30,111,170,0.06)" stroke="#1e6faa" stroke-width="1.8"/>
+    <rect x="120" y="22" width="50" height="150" rx="1"
+          fill="none" stroke="#1e6faa" stroke-width="0.7" opacity="0.4"/>
+    <rect x="114" y="14" width="62" height="5" rx="2" fill="#1e6faa" opacity="0.25"/>
+    <rect x="174" y="17" width="5" height="160" rx="1"
+          fill="none" stroke="#1e6faa" stroke-width="0.8" opacity="0.3"/>
+    <text x="145" y="92" text-anchor="middle" font-size="16" class="sym pulse" fill="#1e6faa">🐍</text>
+    <line x1="124" y1="112" x2="168" y2="112" stroke="#1e6faa" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="124" y1="117" x2="168" y2="117" stroke="#1e6faa" stroke-width="0.4" stroke-dasharray="3 3" opacity="0.3"/>
+    <text transform="translate(147,160) rotate(-90)" class="lbl" fill="#1e6faa">PYTHON</text>
+    <text transform="translate(147,44)  rotate(-90)" class="sub" fill="#1e6faa" opacity="0.6">3.x · scripts · data</text>
+  </g>
+
+  <!-- BOOK 3 · C · #b82020 red · shorter -->
+  <g class="b3" filter="url(#ds)">
+    <rect x="186" y="32" width="68" height="148" rx="3"
+          fill="rgba(184,32,32,0.06)" stroke="#b82020" stroke-width="1.8"/>
+    <rect x="192" y="40" width="56" height="132" rx="1"
+          fill="none" stroke="#b82020" stroke-width="0.7" opacity="0.4"/>
+    <rect x="186" y="32" width="68" height="5" rx="2" fill="#b82020" opacity="0.25"/>
+    <rect x="252" y="35" width="5" height="142" rx="1"
+          fill="none" stroke="#b82020" stroke-width="0.8" opacity="0.3"/>
+    <text x="220" y="96" text-anchor="middle" font-size="12" class="sym pulse" fill="#b82020">*ptr</text>
+    <line x1="196" y1="114" x2="246" y2="114" stroke="#b82020" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="196" y1="119" x2="246" y2="119" stroke="#b82020" stroke-width="0.4" stroke-dasharray="3 3" opacity="0.3"/>
+    <text transform="translate(222,158) rotate(-90)" class="lbl" fill="#b82020">LINGUAGEM C</text>
+    <text transform="translate(222,52)  rotate(-90)" class="sub" fill="#b82020" opacity="0.6">memória · ponteiros</text>
+  </g>
+
+  <!-- BOOK 4 · HTML/CSS · #d46810 amber -->
+  <g class="b4" filter="url(#ds)">
+    <rect x="264" y="20" width="70" height="160" rx="3"
+          fill="rgba(212,104,16,0.06)" stroke="#d46810" stroke-width="1.8"/>
+    <rect x="270" y="28" width="58" height="144" rx="1"
+          fill="none" stroke="#d46810" stroke-width="0.7" opacity="0.4"/>
+    <rect x="264" y="20" width="70" height="5" rx="2" fill="#d46810" opacity="0.25"/>
+    <rect x="332" y="23" width="5" height="154" rx="1"
+          fill="none" stroke="#d46810" stroke-width="0.8" opacity="0.3"/>
+    <text x="299" y="94" text-anchor="middle" font-size="14" class="sym pulse" fill="#d46810">&lt;/&gt;</text>
+    <line x1="274" y1="113" x2="326" y2="113" stroke="#d46810" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="274" y1="118" x2="326" y2="118" stroke="#d46810" stroke-width="0.4" stroke-dasharray="3 3" opacity="0.3"/>
+    <text transform="translate(301,162) rotate(-90)" class="lbl" fill="#d46810">HTML · CSS</text>
+    <text transform="translate(301,46)  rotate(-90)" class="sub" fill="#d46810" opacity="0.6">web · layout · ui</text>
+  </g>
+
+  <!-- BOOK 5 · JavaScript · #c89800 gold · slim -->
+  <g class="b5" filter="url(#ds)">
+    <rect x="344" y="36" width="56" height="144" rx="3"
+          fill="rgba(200,152,0,0.06)" stroke="#c89800" stroke-width="1.8"/>
+    <rect x="350" y="44" width="44" height="128" rx="1"
+          fill="none" stroke="#c89800" stroke-width="0.7" opacity="0.4"/>
+    <rect x="344" y="36" width="56" height="5" rx="2" fill="#c89800" opacity="0.25"/>
+    <rect x="398" y="39" width="5" height="138" rx="1"
+          fill="none" stroke="#c89800" stroke-width="0.8" opacity="0.3"/>
+    <text x="372" y="96" text-anchor="middle" font-size="14" class="sym pulse" fill="#c89800">JS</text>
+    <line x1="354" y1="113" x2="394" y2="113" stroke="#c89800" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="354" y1="118" x2="394" y2="118" stroke="#c89800" stroke-width="0.4" stroke-dasharray="3 3" opacity="0.3"/>
+    <text transform="translate(374,156) rotate(-90)" class="lbl" fill="#c89800">JAVASCRIPT</text>
+    <text transform="translate(374,52)  rotate(-90)" class="sub" fill="#c89800" opacity="0.6">ES6+ · async · DOM</text>
+  </g>
+
+  <!-- BOOK 6 · SQL · #126838 green · tallest -->
+  <g class="b6" filter="url(#ds)">
+    <rect x="410" y="10" width="76" height="170" rx="3"
+          fill="rgba(18,104,56,0.06)" stroke="#126838" stroke-width="1.8"/>
+    <rect x="416" y="18" width="64" height="154" rx="1"
+          fill="none" stroke="#126838" stroke-width="0.7" opacity="0.4"/>
+    <rect x="410" y="10" width="76" height="5" rx="2" fill="#126838" opacity="0.25"/>
+    <rect x="484" y="13" width="5" height="164" rx="1"
+          fill="none" stroke="#126838" stroke-width="0.8" opacity="0.3"/>
+    <text x="448" y="88" text-anchor="middle" font-size="10" class="sym pulse" fill="#126838">SELECT *</text>
+    <line x1="420" y1="106" x2="478" y2="106" stroke="#126838" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="420" y1="111" x2="478" y2="111" stroke="#126838" stroke-width="0.4" stroke-dasharray="3 3" opacity="0.3"/>
+    <text transform="translate(450,164) rotate(-90)" class="lbl" fill="#126838">SQL · DATABASES</text>
+    <text transform="translate(450,42)  rotate(-90)" class="sub" fill="#126838" opacity="0.6">queries · modelagem</text>
+  </g>
+
+  <!-- BOOK 7 · Cloud · #185898 steel blue -->
+  <g class="b7" filter="url(#ds)">
+    <rect x="496" y="26" width="70" height="154" rx="3"
+          fill="rgba(24,88,152,0.06)" stroke="#185898" stroke-width="1.8"/>
+    <rect x="502" y="34" width="58" height="138" rx="1"
+          fill="none" stroke="#185898" stroke-width="0.7" opacity="0.4"/>
+    <rect x="496" y="26" width="70" height="5" rx="2" fill="#185898" opacity="0.25"/>
+    <rect x="564" y="29" width="5" height="148" rx="1"
+          fill="none" stroke="#185898" stroke-width="0.8" opacity="0.3"/>
+    <text x="531" y="92" text-anchor="middle" font-size="18" class="sym pulse" fill="#185898">☁</text>
+    <line x1="506" y1="110" x2="558" y2="110" stroke="#185898" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="506" y1="115" x2="558" y2="115" stroke="#185898" stroke-width="0.4" stroke-dasharray="3 3" opacity="0.3"/>
+    <text transform="translate(533,160) rotate(-90)" class="lbl" fill="#185898">CLOUD COMPUTING</text>
+    <text transform="translate(533,50)  rotate(-90)" class="sub" fill="#185898" opacity="0.6">AWS · GCP · Azure</text>
+  </g>
+
+  <!-- BOOK 8 · Systems Design · #682888 plum -->
+  <g class="b8" filter="url(#ds)">
+    <rect x="576" y="16" width="78" height="164" rx="3"
+          fill="rgba(104,40,136,0.06)" stroke="#682888" stroke-width="1.8"/>
+    <rect x="582" y="24" width="66" height="148" rx="1"
+          fill="none" stroke="#682888" stroke-width="0.7" opacity="0.4"/>
+    <rect x="576" y="16" width="78" height="5" rx="2" fill="#682888" opacity="0.25"/>
+    <rect x="652" y="19" width="5" height="158" rx="1"
+          fill="none" stroke="#682888" stroke-width="0.8" opacity="0.3"/>
+    <text x="615" y="90" text-anchor="middle" font-size="12" class="sym pulse" fill="#682888">⬡ ⬡ ⬡</text>
+    <line x1="586" y1="108" x2="646" y2="108" stroke="#682888" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.4"/>
+    <line x1="586" y1="113" x2="646" y2="113" stroke="#682888" stroke-width="0.4" stroke-dasharray="3 3" opacity="0.3"/>
+    <text transform="translate(617,166) rotate(-90)" class="lbl" fill="#682888">SYSTEMS DESIGN</text>
+    <text transform="translate(617,48)  rotate(-90)" class="sub" fill="#682888" opacity="0.6">arquitetura · escala</text>
+  </g>
+
+  <!-- ═══════════ SHELF ═══════════ -->
+  <!-- main shelf line -->
+  <rect x="0" y="182" width="900" height="2" rx="1" fill="url(#sh)" class="shelf-line"/>
+  <!-- shelf body subtle -->
+  <rect x="10" y="182" width="870" height="8" rx="2" fill="rgba(74,124,89,0.05)"/>
+  <!-- shelf highlight -->
+  <rect x="10" y="182" width="870" height="1" rx="1" fill="rgba(74,124,89,0.35)"/>
+
+  <!-- ═══════════ BOOKENDS — stroke style ═══════════ -->
+  <!-- left -->
+  <rect x="14" y="148" width="10" height="36" rx="2"
+        fill="rgba(74,124,89,0.08)" stroke="rgba(74,124,89,0.5)" stroke-width="1.2"/>
+  <rect x="10" y="178" width="18" height="6"  rx="1"
+        fill="rgba(74,124,89,0.08)" stroke="rgba(74,124,89,0.5)" stroke-width="1.2"/>
+  <!-- right -->
+  <rect x="660" y="148" width="10" height="36" rx="2"
+        fill="rgba(74,124,89,0.08)" stroke="rgba(74,124,89,0.5)" stroke-width="1.2"/>
+  <rect x="656" y="178" width="18" height="6"  rx="1"
+        fill="rgba(74,124,89,0.08)" stroke="rgba(74,124,89,0.5)" stroke-width="1.2"/>
+
+  <!-- ═══════════ FLOATING PARTICLES ═══════════ -->
+  <circle cx="710" cy="48" r="2" fill="rgba(74,124,89,0.3)">
+    <animate attributeName="cy" values="48;28;48" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0.7;0.3" dur="5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="748" cy="72" r="1.4" fill="rgba(74,124,89,0.25)">
+    <animate attributeName="cy" values="72;52;72" dur="4.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.25;0.6;0.25" dur="4.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="780" cy="38" r="1" fill="rgba(74,124,89,0.2)">
+    <animate attributeName="cy" values="38;18;38" dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.2;0.5;0.2" dur="6s" repeatCount="indefinite"/>
+  </circle>
+  <!-- small orbit group -->
+  <g transform="translate(830 55)">
+    <circle r="14" fill="none" stroke="rgba(74,124,89,0.12)" stroke-width="1" stroke-dasharray="3 4"/>
+    <circle r="2.5" fill="rgba(74,124,89,0.35)" class="dot-orbit"/>
+  </g>
+
+  </g>
+</svg>
