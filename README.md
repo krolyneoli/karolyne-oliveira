@@ -1,10 +1,7 @@
-<div align="center">
 
-<!-- substitua pela sua ilustração quando estiver pronta -->
-<img src="SUA_ILUSTRACAO_AQUI.png" width="160"/>
 
-# Karolyne Oliveira
-#### estudante de sistemas de informação
+# 🪴
+#### Estudante de sistemas de informação
 
 </div>
 
