@@ -36,11 +36,11 @@
 
 </div>
 
+<p align="center">
+  <img height="200" src="https://github-readme-stats-inky-two-14.vercel.app/api?username=frostming&show_icons=true&theme=dracula&include_all_commits=true" />
+  <img height="200" src="https://github-readme-stats-inky-two-14.vercel.app/api/top-langs/?username=frostming&theme=dracula&show_icons=true" />
+</p>
 <div align="center">
-
-![streak](https://streak-stats.demolab.com?user=krolyneoli&hide_border=true&ring=4a7c59&fire=8fbc8f&currStreakLabel=4a7c59&sideLabels=4a7c59&dates=999&background=ffffff)
-
-</div>
 
 ---
 
